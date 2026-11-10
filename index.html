@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FAFAF7">
+<title>Lama Alnajmah | Portfolio</title>
+<style>
+/*
+  THEME TOKENS — edit these values to change the look:
+  colors: --bg, --surface, --text, --muted, --accent, --accent-soft, --on-accent, --border
+  fonts: --font-heading and --font-body | shapes: the --radius-* tokens
+  spacing: --section-gap and --max-width
+*/
+:root{
+ color-scheme:light;
+ --bg:#FAFAF7;--surface:#FFFFFF;--text:#1A1A1A;--muted:#5A5A5A;
+ --accent:#756044;--accent-soft:#F0ECE6;--on-accent:#FFFFFF;--border:#E4E2DC;
+ --font-heading:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+ --font-body:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+ --radius-card:14px;--radius-btn:10px;--radius-chip:999px;--radius-photo:50%;
+ --section-gap:clamp(72px,10vw,128px);--max-width:1100px;
+ --shadow-card:0 12px 34px rgba(26,26,26,.07);
+}
+@media(prefers-color-scheme:dark){
+ :root{color-scheme:dark;--bg:#121413;--surface:#1B1E1C;--text:#EDEDE8;--muted:#A9ABA6;--accent:#B49A76;--accent-soft:#292720;--on-accent:#0F1211;--border:#2C302E;--shadow-card:0 12px 34px rgba(0,0,0,.22)}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body);line-height:1.7}
+a{color:var(--accent);text-underline-offset:4px}
+a:hover{text-decoration-thickness:2px}
+button,a{touch-action:manipulation}
+:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.skip{position:absolute;inset-inline-start:1rem;top:-100px;background:var(--surface);padding:12px 16px;border-radius:var(--radius-btn);z-index:100}
+.skip:focus{top:1rem}
+.wrap{width:min(calc(100% - 40px),var(--max-width));margin-inline:auto}
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{font-family:var(--font-heading);font-size:1.25rem;color:var(--text);text-decoration:none;font-weight:700}
+.nav-links{display:flex;gap:clamp(12px,2.2vw,28px);align-items:center}
+.nav-links a{font-size:.86rem;color:var(--muted);text-decoration:none}
+.nav-links a:hover{color:var(--accent)}
+.menu-btn{display:none;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-btn);color:var(--text);min-width:44px;min-height:44px}
+main{overflow:hidden}
+section{padding-block:var(--section-gap)}
+.eyebrow{margin:0 0 12px;color:var(--accent);font-size:.75rem;font-weight:750;letter-spacing:.15em;text-transform:uppercase}
+h1,h2,h3{line-height:1.12;margin:0;font-family:var(--font-heading);font-weight:600;letter-spacing:-.025em}
+h1{font-size:clamp(2.8rem,7vw,5.3rem);max-width:850px}
+h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:28px}
+h3{font-size:1.45rem}
+p{margin:0 0 16px}
+.lead{font-size:clamp(1.05rem,1.8vw,1.25rem);color:var(--muted);max-width:680px;margin-top:24px}
+.home{padding-top:clamp(88px,13vw,160px);padding-bottom:clamp(90px,13vw,160px)}
+.home-inner{max-width:850px}
+.role{font-size:1.05rem;font-weight:650;margin-top:18px}
+.location{color:var(--muted);margin-top:12px}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:11px 19px;border:1px solid var(--accent);border-radius:var(--radius-btn);font:inherit;font-size:.92rem;font-weight:650;text-decoration:none;transition:transform .2s,background .2s}
+.btn.primary{background:var(--accent);color:var(--on-accent)}
+.btn.secondary{background:transparent;color:var(--accent)}
+.btn:hover{transform:translateY(-2px)}
+.section-head{max-width:720px;margin-bottom:34px}
+.story{max-width:760px;color:var(--muted);font-size:1.08rem}
+.highlights{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:30px 0 48px;padding:0;list-style:none}
+.highlights li{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-card);padding:18px 20px;font-weight:600}
+.subhead{font-size:1.25rem;margin:0 0 18px}
+.education{border-inline-start:2px solid var(--border);padding-inline-start:22px;margin-bottom:34px}
+.edu-item{position:relative;padding-bottom:10px}
+.edu-item:before{content:"";position:absolute;inset-inline-start:-29px;top:9px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.edu-item p{color:var(--muted);margin:6px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{display:inline-flex;padding:6px 12px;border-radius:var(--radius-chip);background:var(--accent-soft);color:var(--text);font-size:.82rem;font-weight:600}
+.project-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-card);overflow:hidden;box-shadow:var(--shadow-card);display:flex;flex-direction:column}
+.cover{aspect-ratio:16/10;background:var(--accent-soft);overflow:hidden}
+.cover img{display:block;width:100%;height:100%;object-fit:cover;max-width:100%}
+.cover .fallback{height:100%;display:grid;place-items:center;color:var(--muted);font-size:.9rem}
+.card-body{padding:24px;display:flex;flex-direction:column;align-items:flex-start;flex:1}
+.meta{color:var(--muted);font-size:.85rem;margin:9px 0 14px}
+.card-desc{color:var(--muted);font-size:.96rem}
+.card .chips{margin:4px 0 22px}
+.card-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto}
+.card-actions .btn{min-height:44px;padding:9px 14px;font-size:.86rem}
+.timeline{border-inline-start:2px solid var(--border);padding-inline-start:26px;position:relative}
+.timeline-item{position:relative;padding:0 0 8px}
+.timeline-item:before{content:"";position:absolute;inset-inline-start:-33px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px var(--bg)}
+.timeline-item p{color:var(--muted);margin:8px 0 0;max-width:700px}
+.date{color:var(--muted);font-size:.88rem;margin-top:7px}
+.skill-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.skill-card{padding:22px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-card)}
+.skill-card h3{font-size:1.2rem}
+.contact-panel{padding:clamp(24px,5vw,48px);background:var(--accent-soft);border-radius:var(--radius-card)}
+.email{font-family:var(--font-heading);font-size:clamp(1.3rem,3vw,2rem);overflow-wrap:anywhere}
+.contact-links{display:flex;flex-wrap:wrap;gap:22px;margin-top:24px}
+.contact-links a{font-weight:650}
+.cv-note{display:inline-flex;align-items:center;min-height:48px;padding:10px 16px;color:var(--muted);border:1px solid var(--border);border-radius:var(--radius-btn);font-size:.9rem}
+footer{border-top:1px solid var(--border);padding:26px 0;color:var(--muted);font-size:.88rem}
+dialog{width:min(92vw,900px);max-height:90vh;overflow:auto;border:1px solid var(--border);border-radius:var(--radius-card);padding:0;background:var(--surface);color:var(--text);box-shadow:0 24px 80px rgba(0,0,0,.3)}
+dialog::backdrop{background:rgba(10,12,11,.68);backdrop-filter:blur(3px)}
+.dialog-inner{padding:clamp(24px,5vw,48px)}
+.dialog-close{float:right;min-width:44px;min-height:44px;border:1px solid var(--border);border-radius:var(--radius-btn);background:transparent;color:var(--text);font:inherit;cursor:pointer}
+.dialog-inner h2{margin:12px 0}
+.dialog-inner h3{margin:26px 0 10px}
+.dialog-inner p{color:var(--muted)}
+noscript .case-inline{display:block}
+@media(max-width:767px){
+ .wrap{width:min(calc(100% - 32px),var(--max-width))}
+ .menu-btn{display:inline-flex;align-items:center;justify-content:center}
+ .nav{position:relative;flex-wrap:wrap}
+ .nav-links{display:none;position:absolute;top:71px;inset-inline:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-card);padding:12px;flex-direction:column;align-items:stretch;gap:0}
+ .nav-links.open{display:flex}
+ .nav-links a{padding:12px;min-height:44px}
+ .project-grid,.skill-grid,.highlights{grid-template-columns:1fr}
+ dialog{width:100vw;height:100dvh;max-height:100dvh;border-radius:0;border-inline:0}
+}
+@media(min-width:1100px){.project-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(prefers-reduced-motion:no-preference){
+ .reveal{animation:rise .65s ease both}
+ @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+@media print{header,.actions,.card-actions,.dialog-close{display:none!important}section{padding-block:32px}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+ <div class="wrap nav">
+  <a class="brand" href="#home">Lama Alnajmah</a>
+  <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinks">☰</button>
+  <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+   <a href="#about">About</a><a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+  </nav>
+ </div>
+</header>
+<main id="main">
+ <section class="home wrap" id="home">
+  <div class="home-inner reveal">
+   <p class="eyebrow">Computer Science</p>
+   <h1>Lama Alnajmah</h1>
+   <p class="role">UI/UX Designer &amp; Software Development</p>
+   <p class="lead">I’m a Computer Science student who enjoys learning about software development and solving problems through technology. I have worked on projects using Java and databases, and I’m always looking for opportunities to learn, take on challenges, and gain experience through internships and projects.</p>
+   <p class="location">Eastern Region</p>
+   <div class="actions"><a class="btn primary" href="#contact">Contact me</a><span class="cv-note">CV coming soon</span></div>
+  </div>
+ </section>
+
+ <section class="wrap" id="about">
+  <div class="section-head"><p class="eyebrow">A little about me</p><h2>About</h2></div>
+  <p class="story">I’m a Computer Science student who enjoys learning about software development and solving problems through technology. I have worked on projects using Java and databases, which helped me strengthen both my technical and teamwork skills. I’m always looking for opportunities to learn new things, take on challenges, and gain experience through internships and projects.</p>
+  <ul class="highlights">
+   <li>Software and Systems Development</li><li>Digital Logic Design and Circuit Simulation</li><li>System Analysis and Requirements Engineering</li><li>Database Design and Management</li><li>Problem Solving and Technical Analysis</li>
+  </ul>
+  <h3 class="subhead">Education</h3>
+  <div class="education">
+   <div class="edu-item"><strong>Bachelor of Computer Science</strong><p>Imam Abdulrahman Bin Faisal University</p><p>In progress</p></div>
+  </div>
+  <h3 class="subhead">Languages</h3>
+  <div class="chips"><span class="chip">Arabic · Native</span><span class="chip">English · Intermediate</span></div>
+ </section>
+
+ <section class="wrap" id="projects">
+  <div class="section-head"><p class="eyebrow">Selected work</p><h2>Projects</h2></div>
+  <div class="project-grid">
+   <article class="card">
+    <div class="cover"><img src="assets/project_logo.jpeg" alt="Cover image for Bus Attendance and Scheduling System" loading="lazy" decoding="async" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><div class="fallback" hidden>Project cover image</div></div>
+    <div class="card-body">
+     <p class="eyebrow">University team project</p>
+     <h3>Bus Attendance and Scheduling System</h3>
+     <p class="meta">Imam Abdulrahman Bin Faisal University</p>
+     <p class="card-desc">A Java and MySQL system designed to improve attendance tracking and bus scheduling by replacing manual paper-based processes with a digital solution.</p>
+     <div class="chips"><span class="chip">Java</span><span class="chip">MySQL</span><span class="chip">Figma</span><span class="chip">JDBC</span></div>
+     <div class="card-actions"><button class="btn primary" type="button" data-open="bus-case">View case study</button><a class="btn secondary" href="https://github.com/lamaalnjmah-coder/Bus-Attendance-System" target="_blank" rel="noopener">View project</a></div>
+    </div>
+   </article>
+  </div>
+  <dialog id="bus-case" aria-labelledby="bus-title">
+   <div class="dialog-inner">
+    <button class="dialog-close" type="button" aria-label="Close case study">Close ✕</button>
+    <p class="eyebrow">University team project · Imam Abdulrahman Bin Faisal University</p>
+    <h2 id="bus-title">Bus Attendance and Scheduling System</h2>
+    <h3>Overview</h3>
+    <p>Developed a Bus Attendance and Scheduling System as a university team project using Java and MySQL. The system was designed to improve attendance tracking and bus scheduling by replacing manual paper-based processes with a digital solution.</p>
+    <h3>My contributions</h3>
+    <ul>
+     <li>Database design and implementation using MySQL.</li>
+     <li>Java development and database connectivity using JDBC.</li>
+     <li>Designed the interactive user interface prototype using Figma.</li>
+     <li>Collaborating with team members throughout the development process.</li>
+    </ul>
+    <h3>Tools</h3>
+    <div class="chips"><span class="chip">Java</span><span class="chip">MySQL</span><span class="chip">JDBC</span><span class="chip">Figma</span></div>
+    <h3>Project link</h3>
+    <p><a href="https://github.com/lamaalnjmah-coder/Bus-Attendance-System" target="_blank" rel="noopener">Bus Attendance and Scheduling System on GitHub</a></p>
+   </div>
+  </dialog>
+  <noscript><style>#bus-case{display:block;position:static;margin:24px auto;max-height:none;width:100%}#bus-case .dialog-close{display:none}</style></noscript>
+ </section>
+
+ <section class="wrap" id="experience">
+  <div class="section-head"><p class="eyebrow">Activities</p><h2>Experience</h2></div>
+  <div class="timeline">
+   <article class="timeline-item">
+    <h3>Design Committee Member</h3>
+    <div class="date">Jan 2025 – Jan 2026 · Imam Abdulrahman Bin Faisal University</div>
+    <p>Contributed to designing posters for the club’s events.</p>
+   </article>
+  </div>
+ </section>
+
+ <section class="wrap" id="skills">
+  <div class="section-head"><p class="eyebrow">What I work with</p><h2>Skills</h2></div>
+  <div class="skill-grid">
+   <article class="skill-card"><h3>Programming</h3><div class="chips"><span class="chip">Java</span><span class="chip">OOP</span></div></article>
+   <article class="skill-card"><h3>Database</h3><div class="chips"><span class="chip">MySQL</span></div></article>
+   <article class="skill-card"><h3>Design</h3><div class="chips"><span class="chip">Figma</span></div></article>
+  </div>
+ </section>
+
+ <section class="wrap" id="contact">
+  <div class="section-head"><p class="eyebrow">Let’s connect</p><h2>Contact</h2></div>
+  <div class="contact-panel">
+   <p class="eyebrow">Email</p>
+   <a class="email" href="mailto:lama.m.alnajmah@gmail.com">lama.m.alnajmah@gmail.com</a>
+   <div class="contact-links">
+    <a href="https://www.linkedin.com/in/lama-alnajmah-97453541a" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/lamaalnjmah-coder/Bus-Attendance-System" target="_blank" rel="noopener">GitHub</a>
+   </div>
+  </div>
+ </section>
+</main>
+<footer><div class="wrap">© <span id="year">2026</span> Lama Alnajmah</div></footer>
+<script>
+/* Mobile navigation and accessible project case-study dialog. */
+const menuBtn=document.getElementById('menuBtn'),nav=document.getElementById('navLinks');
+menuBtn.addEventListener('click',()=>{const open=menuBtn.getAttribute('aria-expanded')!=='true';menuBtn.setAttribute('aria-expanded',String(open));menuBtn.setAttribute('aria-label',open?'Close navigation':'Open navigation');nav.classList.toggle('open',open)});
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.setAttribute('aria-label','Open navigation')}));
+document.getElementById('year').textContent=new Date().getFullYear();
+const dlg=document.getElementById('bus-case');let opener=null;
+function openCase(button){opener=button||document.querySelector('[data-open="bus-case"]');if(!dlg.open)dlg.showModal();document.body.style.overflow='hidden';history.replaceState(null,'','#bus-attendance-case');}
+function closeCase(){if(dlg.open)dlg.close();document.body.style.overflow='';history.replaceState(null,'',location.pathname+location.search);if(opener)opener.focus();}
+document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>openCase(b)));
+dlg.querySelector('.dialog-close').addEventListener('click',closeCase);
+dlg.addEventListener('cancel',e=>{e.preventDefault();closeCase()});
+dlg.addEventListener('click',e=>{if(e.target===dlg)closeCase()});
+if(location.hash==='#bus-attendance-case')openCase();
+</script>
+</body>
+</html>
